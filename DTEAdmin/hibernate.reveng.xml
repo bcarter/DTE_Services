@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-schema="DTE_COURSE_ADMIN" match-name="ADDRESS" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="BATCH_LOAD_ERRORS" />
+	<table-filter match-schema="DTE_COURSE_ADMIN" match-name="CUSTOMER" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="DTE_USERS" />
+	<table-filter match-schema="DTE_COURSE_ADMIN" match-name="GUEST" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="GUEST_ID_GENERATOR" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_COURSES" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_COURSE_LANGUAGES" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_COURSE_TITLES" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_EDUCATION_CENTERS" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_INDUSTRYS" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_SH_AUDIENCES" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_SH_COURSES" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="OTI_STATE_CODES" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="PHONE_NUMBER" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="TOAD_PLAN_TABLE" />
+	<table-filter match-schema="DTE_COURSE_ADMIN"
+		match-name="V_EXTRANET_USERS" />
+	<table schema="DTE_COURSE_ADMIN" name="ADDRESS">
+		<column name="ID"></column>
+		<column name="STREET"></column>
+		<column name="CITY"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="GUEST">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="SIGNINGDATE"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="V_EXTRANET_USERS">
+		<column name="USERNAME"></column>
+		<column name="FIRSTNAME"></column>
+		<column name="LASTNAME"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_SH_AUDIENCES">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_COURSE_LANGUAGES">
+		<column name="ID"></column>
+		<column name="LANG"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="TOAD_PLAN_TABLE">
+		<column name="STATEMENT_ID"></column>
+		<column name="PLAN_ID"></column>
+		<column name="TIMESTAMP"></column>
+		<column name="REMARKS"></column>
+		<column name="OPERATION"></column>
+		<column name="OPTIONS"></column>
+		<column name="OBJECT_NODE"></column>
+		<column name="OBJECT_OWNER"></column>
+		<column name="OBJECT_NAME"></column>
+		<column name="OBJECT_ALIAS"></column>
+		<column name="OBJECT_INSTANCE"></column>
+		<column name="OBJECT_TYPE"></column>
+		<column name="OPTIMIZER"></column>
+		<column name="SEARCH_COLUMNS"></column>
+		<column name="ID"></column>
+		<column name="PARENT_ID"></column>
+		<column name="DEPTH"></column>
+		<column name="POSITION"></column>
+		<column name="COST"></column>
+		<column name="CARDINALITY"></column>
+		<column name="BYTES"></column>
+		<column name="OTHER_TAG"></column>
+		<column name="PARTITION_START"></column>
+		<column name="PARTITION_STOP"></column>
+		<column name="PARTITION_ID"></column>
+		<column name="OTHER"></column>
+		<column name="DISTRIBUTION"></column>
+		<column name="CPU_COST"></column>
+		<column name="IO_COST"></column>
+		<column name="TEMP_SPACE"></column>
+		<column name="ACCESS_PREDICATES"></column>
+		<column name="FILTER_PREDICATES"></column>
+		<column name="PROJECTION"></column>
+		<column name="TIME"></column>
+		<column name="QBLOCK_NAME"></column>
+		<column name="OTHER_XML"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="BATCH_LOAD_ERRORS">
+		<column name="TITLE"></column>
+		<column name="ED_CENTER"></column>
+		<column name="STATE"></column>
+		<column name="LOCATION"></column>
+		<column name="ADDRESS"></column>
+		<column name="ERROR_MESSAGE"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_COURSE_TITLES">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="DESC_URL"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_INDUSTRYS">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="DTE_USERS">
+		<column name="ID"></column>
+		<column name="EXTRANET_EMAIL"></column>
+		<column name="OSHA_CN"></column>
+		<column name="CENTER_ID"></column>
+		<column name="USER_TYPE"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="PHONE_NUMBER">
+		<column name="ID"></column>
+		<column name="TYPE"></column>
+		<column name="NUM"></column>
+		<column name="ID_CUSTOMER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_SH_COURSES">
+		<column name="ID"></column>
+		<column name="GRANTEE_NAME"></column>
+		<column name="GRANTEE_CITY"></column>
+		<column name="GRANTEE_STATE_ID"></column>
+		<column name="TITLE"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="LOCATION"></column>
+		<column name="ADDRESS"></column>
+		<column name="CITY"></column>
+		<column name="COST"></column>
+		<column name="URL"></column>
+		<column name="STATE_ID"></column>
+		<column name="START_DATE"></column>
+		<column name="END_DATE"></column>
+		<column name="LENGTH"></column>
+		<column name="LANG_ID"></column>
+		<column name="INDUSTRY_ID"></column>
+		<column name="AUDIENCE_ID"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+		<column name="ACTIVE_IND"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="CUSTOMER">
+		<column name="ID"></column>
+		<column name="FIRST_NAME"></column>
+		<column name="LAST_NAME"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_STATE_CODES">
+		<column name="ID"></column>
+		<column name="STATE_CD"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="GUEST_ID_GENERATOR">
+		<column name="SEQ_COUNT"></column>
+		<column name="SEQ_NAME"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_COURSES">
+		<column name="ID"></column>
+		<column name="TITLE_ID"></column>
+		<column name="ED_CENTER_ID"></column>
+		<column name="INDUSTRY_ID"></column>
+		<column name="LENGTH"></column>
+		<column name="LANG_ID"></column>
+		<column name="CITY"></column>
+		<column name="STATE_ID"></column>
+		<column name="LOCATION"></column>
+		<column name="ADDRESS"></column>
+		<column name="URL"></column>
+		<column name="START_DATE"></column>
+		<column name="END_DATE"></column>
+		<column name="COST"></column>
+		<column name="CM_POINTS"></column>
+		<column name="CEU_POINTS"></column>
+		<column name="NO_OF_DAYS"></column>
+		<column name="ACTIVE_IND"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+	</table>
+	<table schema="DTE_COURSE_ADMIN" name="OTI_EDUCATION_CENTERS">
+		<column name="ID"></column>
+		<column name="NAME"></column>
+		<column name="CITY"></column>
+		<column name="STATE_ID"></column>
+		<column name="DESCRIPTION"></column>
+		<column name="INSERT_DATE"></column>
+		<column name="UPDATE_DATE"></column>
+		<column name="UPDATE_USER"></column>
+		<column name="URL"></column>
+	</table>
+</hibernate-reverse-engineering>

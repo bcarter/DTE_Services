@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<display-name>DTEAdmin</display-name>
+	<module>
+		<web>
+			<web-uri>DTEAdmin.war</web-uri>
+			<context-root>DTEAdmin</context-root>
+		</web>
+	</module>
+</application>
