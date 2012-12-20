@@ -2,10 +2,7 @@ package gov.osha.dteAdmin;
 
 // Generated Nov 21, 2012 11:24:52 AM by Hibernate Tools 4.0.0
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
@@ -17,49 +14,62 @@ import java.math.BigDecimal;
 @XmlRootElement
 public class StateCode implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4774642082196483662L;
-	private BigDecimal id;
-	private String stateCd;
-	private String description;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4774642082196483662L;
+    private BigDecimal id;
+    private String stateCd;
+    private String description;
+    private String updateUser;
 
-	public StateCode() {
-	}
+    public StateCode() {
+    }
 
-	public StateCode(BigDecimal id, String stateCd, String description) {
-		this.id = id;
-		this.stateCd = stateCd;
-		this.description = description;
-	}
+    public StateCode(BigDecimal id, String stateCd, String description, String updateUser) {
+        setId(id);
+        setStateCd(stateCd);
+        setDescription(description);
+        setUpdateUser(updateUser);
+    }
 
-	@Id
-	@Column(name = "ID", unique = true, nullable = false, precision = 22, scale = 0)
-	public BigDecimal getId() {
-		return this.id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "G1")
+    @SequenceGenerator(name = "G1", sequenceName = "oti_state_codes_seq", allocationSize = 1)
+    @Column(name = "ID", unique = true, nullable = false, precision = 22, scale = 0)
+    public BigDecimal getId() {
+        return this.id;
+    }
 
-	public void setId(BigDecimal id) {
-		this.id = id;
-	}
+    public void setId(BigDecimal id) {
+        this.id = id;
+    }
 
-	@Column(name = "STATE_CD", nullable = false, length = 2)
-	public String getStateCd() {
-		return this.stateCd;
-	}
+    @Column(name = "STATE_CD", nullable = false, length = 2)
+    public String getStateCd() {
+        return this.stateCd;
+    }
 
-	public void setStateCd(String stateCd) {
-		this.stateCd = stateCd;
-	}
+    public void setStateCd(String stateCd) {
+        this.stateCd = stateCd;
+    }
 
-	@Column(name = "DESCRIPTION", nullable = false, length = 30)
-	public String getDescription() {
-		return this.description;
-	}
+    @Column(name = "DESCRIPTION", nullable = false, length = 30)
+    public String getDescription() {
+        return this.description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column(name = "UPDATE_USER", length = 30)
+    public String getUpdateUser() {
+        return this.updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
 
 }

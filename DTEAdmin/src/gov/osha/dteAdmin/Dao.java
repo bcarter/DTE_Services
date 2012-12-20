@@ -1,10 +1,11 @@
 package gov.osha.dteAdmin;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 public class Dao {
 

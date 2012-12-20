@@ -28,7 +28,7 @@ public class DteUserRS {
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
         HibernateUtil.beginViewTransaction();
-        List<DteUser> retList = null;
+        List<DteUser> retList;
 
         if (currentUser.getUserType().equals("A")) {
             retList = dteUserDao.getAll();
@@ -49,7 +49,7 @@ public class DteUserRS {
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
         HibernateUtil.beginViewTransaction();
-        DteUser retUser = null;
+        DteUser retUser;
 
         if (currentUser.getUserType().equals("A")) {
             retUser = (DteUser) dteUserDao.getById(dteUserId);
@@ -70,7 +70,6 @@ public class DteUserRS {
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
         HibernateUtil.beginWriteTransaction();
-        DteUser retUser = null;
 
         if (currentUser.getUserType().equals("A")) {
             inUser.setUpdateUser(currentUser.getOshaCn());
@@ -92,7 +91,6 @@ public class DteUserRS {
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
         HibernateUtil.beginWriteTransaction();
-        DteUser retUser = null;
 
         if (currentUser.getUserType().equals("A")) {
             inUser.setUpdateUser(currentUser.getOshaCn());

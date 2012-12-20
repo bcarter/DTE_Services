@@ -7,13 +7,11 @@ public class EducationCenterDao extends Dao {
         super(EducationCenter.class);
     }
 
+    @SuppressWarnings("unchecked")
     public List<EducationCenter> getAuthorizedEdCenters(DteUser currentUser) {
-        @SuppressWarnings("unchecked")
-        List<EducationCenter> educationCenter = this.getSez().createQuery(
+        return (List<EducationCenter>) this.getSez().createQuery(
                 "from EducationCenter as educationCenter where educationCenter.id=:userEdCenter or 'A'=:userAdmin")
                 .setBigDecimal("userEdCenter", currentUser.getEducationCenter().getId())
                 .setString("userAdmin", currentUser.getUserType()).list();
-
-        return  educationCenter;
     }
 }
