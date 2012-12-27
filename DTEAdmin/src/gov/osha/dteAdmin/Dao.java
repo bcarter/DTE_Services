@@ -1,7 +1,7 @@
 package gov.osha.dteAdmin;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.hibernate.StatelessSession;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.logging.Logger;
 
 public class Dao {
 
-    private Session sez;
+    private StatelessSession sez;
     private Class clz;
     protected static final Logger systemLogger = Logger.getLogger("system");
 
-    /*a new instance of AbstractDAO */
+    /*a new instance of Dao */
     public Dao() {
     }
 
@@ -21,11 +21,11 @@ public class Dao {
         this.clz = clz;
     }
 
-    public Session getSez() {
+    public StatelessSession getSez() {
         return sez;
     }
 
-    public void setSez(Session sez) {
+    public void setSez(StatelessSession sez) {
         this.sez = sez;
     }
 
@@ -43,11 +43,11 @@ public class Dao {
     }
 
     public void save(Object o) {
-        sez.save(o);
+        sez.insert(o); //  .save(o);
     }
 
     public void merge(Object o) {
-        sez.merge(o);
+        sez.update(o); //.merge(o);
     }
 
     public void delete(Object o) {
@@ -55,7 +55,7 @@ public class Dao {
     }
 
     public void rollback(Object o) {
-        sez.evict(o);
+        sez.refresh(o); //.evict(o);
     }
 
     public Object getById(BigDecimal id) {

@@ -24,7 +24,7 @@ public class DteUserDao extends Dao {
 
     public void save(DteUser dteUser) {
         dteUser.setOshaCn(getLdapCn(dteUser.getExtranetEmail()));
-        this.getSez().save(dteUser);
+        this.getSez().insert(dteUser); //.save(dteUser);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +51,8 @@ public class DteUserDao extends Dao {
             LdapContext ctx = new InitialLdapContext(env, null);
             ctx.setRequestControls(null);
 
-            String searchFilter = "(&(oshamail={0}))";
+//            String searchFilter = "(&(oshamail={0}))";
+            String searchFilter = "(&(uid={0}))";
             Object[] searchArguments = new Object[]{email};
 
             NamingEnumeration<?> namingEnum = ctx.search("cn=users,dc=osha,dc=gov", searchFilter, searchArguments, getSimpleSearchControls());
