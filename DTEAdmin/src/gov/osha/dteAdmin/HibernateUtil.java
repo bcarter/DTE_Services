@@ -1,8 +1,6 @@
 package gov.osha.dteAdmin;
 
-import org.hibernate.FlushMode;
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
 @SuppressWarnings("deprecation")
@@ -26,14 +24,14 @@ public class HibernateUtil {
     }
 
 // new stuff
-    public static void beginViewTransaction() {
-        sessionFactory.getCurrentSession().beginTransaction();
-        sessionFactory.getCurrentSession().setFlushMode(FlushMode.NEVER);
+    public static void beginViewTransaction(Session currentSession) {
+        currentSession.beginTransaction();
+        currentSession.setFlushMode(FlushMode.NEVER);
     }
 
-    public static String showMode() {
+    public static String showMode(Session currentSession) {
         if (transactionIsActive()) {
-            return sessionFactory.getCurrentSession().getFlushMode().toString();
+            return currentSession.getFlushMode().toString();
         }
         return "NOT-ACTIVE";
     }
@@ -42,9 +40,9 @@ public class HibernateUtil {
      * Starts a read/write hibernate transaction (FlushMode.AUTO)
      *
      */
-    public static void beginWriteTransaction() {
-        sessionFactory.getCurrentSession().beginTransaction();
-        sessionFactory.getCurrentSession().setFlushMode(FlushMode.AUTO);
+    public static void beginWriteTransaction(Session currentSession) {
+        currentSession.beginTransaction();
+        currentSession.setFlushMode(FlushMode.AUTO);
     }
 
 
@@ -57,25 +55,25 @@ public class HibernateUtil {
 
     // Commits the hibernate transaction (if active).
 
-    public static void commitTransaction() throws HibernateException {
+    public static void commitTransaction(Session currentSession) throws HibernateException {
         if (transactionIsActive()) {
-            sessionFactory.getCurrentSession().getTransaction().commit();
+            currentSession.getTransaction().commit();
         }
     }
 
 
     // Rolls back current hibernate transaction (if active).
 
-    public static void rollbackTransaction() {
+    public static void rollbackTransaction(Session currentSession) {
         if (transactionIsActive()) {
-            sessionFactory.getCurrentSession().getTransaction().rollback();
+            currentSession.getTransaction().rollback();
         }
     }
 
 
     // Get's the current transaction's hashCode
 
-    public static long transactionHashcode() {
-        return sessionFactory.getCurrentSession().getTransaction().hashCode();
+    public static long transactionHashcode(Session currentSession) {
+        return currentSession.getTransaction().hashCode();
     }
 }

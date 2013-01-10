@@ -1,5 +1,7 @@
 package gov.osha.dteAdmin;
 
+import org.hibernate.Session;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -14,9 +16,10 @@ public class DteUserRS {
 
     private DteUser getCurrentUser(String oshaCn) {
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        HibernateUtil.beginViewTransaction();
+        Session currentSession = HibernateUtil.getSessionFactory().openSession();
+        HibernateUtil.beginViewTransaction(currentSession);
         DteUser currentUser = dteUserDao.getUserByOshaCN(oshaCn);
-        HibernateUtil.commitTransaction();
+        HibernateUtil.commitTransaction(currentSession);
         return currentUser;
     }
 
@@ -27,17 +30,15 @@ public class DteUserRS {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        HibernateUtil.beginViewTransaction();
+
         List<DteUser> retList;
 
         if (currentUser.getUserType().equals("A")) {
             retList = dteUserDao.getAll();
         } else {
-            HibernateUtil.commitTransaction();
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
-        HibernateUtil.commitTransaction();
         return retList;
     }
 
@@ -48,17 +49,14 @@ public class DteUserRS {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        HibernateUtil.beginViewTransaction();
         DteUser retUser;
 
         if (currentUser.getUserType().equals("A")) {
             retUser = (DteUser) dteUserDao.getById(dteUserId);
         } else {
-            HibernateUtil.commitTransaction();
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
-        HibernateUtil.commitTransaction();
         return retUser;
     }
 
@@ -69,17 +67,14 @@ public class DteUserRS {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        HibernateUtil.beginWriteTransaction();
 
         if (currentUser.getUserType().equals("A")) {
             inUser.setUpdateUser(currentUser.getOshaCn());
             dteUserDao.save(inUser);
         } else {
-            HibernateUtil.commitTransaction();
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
-        HibernateUtil.commitTransaction();
         return Response.ok().build();
     }
 
@@ -90,17 +85,14 @@ public class DteUserRS {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        HibernateUtil.beginWriteTransaction();
 
         if (currentUser.getUserType().equals("A")) {
             inUser.setUpdateUser(currentUser.getOshaCn());
             dteUserDao.merge(inUser);
         } else {
-            HibernateUtil.commitTransaction();
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
-        HibernateUtil.commitTransaction();
         return Response.ok().build();
     }
 }

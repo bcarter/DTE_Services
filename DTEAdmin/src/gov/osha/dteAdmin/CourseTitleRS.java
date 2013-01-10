@@ -12,10 +12,8 @@ public class CourseTitleRS {
     @Produces({ "application/xml", "application/json" })
     public List<CourseTitle> getCourseTitles() {
         CourseTitleDao courseTitleDao = DaoFactory.getCourseTitleDao();
-        HibernateUtil.beginViewTransaction();
         @SuppressWarnings("unchecked")
         List <CourseTitle>retList = courseTitleDao.getAll();
-        HibernateUtil.commitTransaction();
         return retList;
     }
 }

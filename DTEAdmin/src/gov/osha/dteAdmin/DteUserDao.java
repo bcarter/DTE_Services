@@ -17,14 +17,14 @@ public class DteUserDao extends Dao {
     }
 
     public DteUser getUserByOshaCN(String oshaCN) {
-        return (DteUser) this.getSez().createQuery(
+        return (DteUser) this.getSession().createQuery(
                 "from DteUser as dteUser where dteUser.oshaCn=:oshaCN")
                 .setString("oshaCN", oshaCN).uniqueResult();
     }
 
     public void save(DteUser dteUser) {
         dteUser.setOshaCn(getLdapCn(dteUser.getExtranetEmail()));
-        this.getSez().insert(dteUser); //.save(dteUser);
+        this.getSession().save(dteUser);
     }
 
     @SuppressWarnings("unchecked")

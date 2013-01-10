@@ -12,10 +12,8 @@ public class CourseLanguageRS {
     @Produces({ "application/xml", "application/json" })
     public List<CourseLanguage> getCourseLanguages() {
         CourseLanguageDao courseLanguageDao = DaoFactory.getCourseLanguageDao();
-        HibernateUtil.beginViewTransaction();
         @SuppressWarnings("unchecked")
         List <CourseLanguage>retList = courseLanguageDao.getAll();
-        HibernateUtil.commitTransaction();
         return retList;
     }
 }

@@ -1,6 +1,5 @@
 package gov.osha.dteAdmin;
-
-import org.hibernate.StatelessSession;
+import org.hibernate.Session;
 
 public class DaoFactory {
     //returns courseDAO
@@ -45,9 +44,9 @@ public class DaoFactory {
     {
         try
         {
-            StatelessSession s = getCurrentSession();
+            Session s = getCurrentSession();
             Dao d = (Dao)c.newInstance();
-            d.setSez(s);
+            d.setSession(s);
             return d;
         } catch (InstantiationException ex) {
             ex.printStackTrace();
@@ -57,8 +56,8 @@ public class DaoFactory {
         return null;
     }
 
-    public static StatelessSession getCurrentSession()
+    public static Session getCurrentSession()
     {
-        return HibernateUtil.getSessionFactory().openStatelessSession();//  .getCurrentSession();
+        return HibernateUtil.getSessionFactory().openSession();//  .getCurrentSession();
     }
 }

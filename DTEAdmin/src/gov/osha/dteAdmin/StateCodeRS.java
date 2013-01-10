@@ -12,10 +12,8 @@ public class StateCodeRS {
     @Produces({ "application/xml", "application/json" })
     public List<StateCode> getStateCodes() {
         StateCodeDao stateCodeDao = DaoFactory.getStateCodeDao();
-        HibernateUtil.beginViewTransaction();
         @SuppressWarnings("unchecked")
         List <StateCode>retList = stateCodeDao.getAll();
-        HibernateUtil.commitTransaction();
         return retList;
     }
 }

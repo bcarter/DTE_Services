@@ -35,6 +35,7 @@ public class Course implements java.io.Serializable {
 	private BigDecimal noOfDays;
 	private BigDecimal activeInd = new BigDecimal(1);
     private String updateUser;
+    private Date updateDate;
 
 	public Course() {
 	}
@@ -247,4 +248,12 @@ public class Course implements java.io.Serializable {
 		this.updateUser = updateUser;
 	}
 
+    @Column(name = "UPDATE_DATE", updatable = false)
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 }
