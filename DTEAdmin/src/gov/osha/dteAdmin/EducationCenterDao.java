@@ -1,6 +1,5 @@
 package gov.osha.dteAdmin;
 
-import org.hibernate.Session;
 import org.hibernate.StatelessSession;
 
 import java.util.List;
@@ -13,13 +12,14 @@ public class EducationCenterDao extends Dao {
     @SuppressWarnings("unchecked")
     public List<EducationCenter> getAuthorizedEdCenters(DteUser currentUser) {
         List<EducationCenter> retList;
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginViewTransaction(currentSession);
-        retList = (List<EducationCenter>) this.getSession().createQuery(
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        retList = (List<EducationCenter>) currentSession.createQuery(
                 "from EducationCenter as educationCenter where educationCenter.id=:userEdCenter or 'A'=:userAdmin")
                 .setBigDecimal("userEdCenter", currentUser.getEducationCenter().getId())
                 .setString("userAdmin", currentUser.getUserType()).list();
-        HibernateUtil.commitTransaction(currentSession);
+        currentSession.getTransaction().commit();
+        currentSession.close();
         return retList;
     }
 }

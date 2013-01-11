@@ -1,6 +1,7 @@
 package gov.osha.dteAdmin;
 
-import org.hibernate.*;
+import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.cfg.Configuration;
 
 @SuppressWarnings("deprecation")
@@ -24,14 +25,14 @@ public class HibernateUtil {
     }
 
 // new stuff
-    public static void beginViewTransaction(Session currentSession) {
-        currentSession.beginTransaction();
-        currentSession.setFlushMode(FlushMode.NEVER);
-    }
+//    public static void beginViewTransaction(StatelessSession currentSession) {
+//        currentSession.beginTransaction();
+////        currentSession.setFlushMode(FlushMode.NEVER);
+//    }
 
-    public static String showMode(Session currentSession) {
+    public static String showMode(StatelessSession currentSession) {
         if (transactionIsActive()) {
-            return currentSession.getFlushMode().toString();
+//            return currentSession.getFlushMode().toString();
         }
         return "NOT-ACTIVE";
     }
@@ -40,10 +41,10 @@ public class HibernateUtil {
      * Starts a read/write hibernate transaction (FlushMode.AUTO)
      *
      */
-    public static void beginWriteTransaction(Session currentSession) {
-        currentSession.beginTransaction();
-        currentSession.setFlushMode(FlushMode.AUTO);
-    }
+//    public static void beginWriteTransaction(StatelessSession currentSession) {
+//        currentSession.beginTransaction();
+////        currentSession.setFlushMode(FlushMode.AUTO);
+//    }
 
 
     // Determines whether the current transaction is active
@@ -55,16 +56,16 @@ public class HibernateUtil {
 
     // Commits the hibernate transaction (if active).
 
-    public static void commitTransaction(Session currentSession) throws HibernateException {
-        if (transactionIsActive()) {
-            currentSession.getTransaction().commit();
-        }
-    }
+//    public static void commitTransaction(StatelessSession currentSession) throws HibernateException {
+//        if (transactionIsActive()) {
+//            currentSession.getTransaction().commit();
+//        }
+//    }
 
 
     // Rolls back current hibernate transaction (if active).
 
-    public static void rollbackTransaction(Session currentSession) {
+    public static void rollbackTransaction(StatelessSession currentSession) {
         if (transactionIsActive()) {
             currentSession.getTransaction().rollback();
         }
@@ -73,7 +74,7 @@ public class HibernateUtil {
 
     // Get's the current transaction's hashCode
 
-    public static long transactionHashcode(Session currentSession) {
+    public static long transactionHashcode(StatelessSession currentSession) {
         return currentSession.getTransaction().hashCode();
     }
 }

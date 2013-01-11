@@ -1,7 +1,7 @@
 package gov.osha.dteAdmin;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
+import org.hibernate.StatelessSession;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Dao {
 
-    private Session session;
+//    private Session session;
     private Class aClass;
     protected static final Logger systemLogger = Logger.getLogger("system");
 
@@ -21,13 +21,13 @@ public class Dao {
         this.aClass = aClass;
     }
 
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
+//    public Session getSession() {
+//        return session;
+//    }
+//
+//    public void setSession(Session session) {
+//        this.session = session;
+//    }
 
     public Class getaClass() {
         return aClass;
@@ -38,41 +38,53 @@ public class Dao {
     }
 
     public List getAll() {
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginViewTransaction(currentSession);
-        Query q = this.session.createQuery("FROM " + aClass.getName());
-        HibernateUtil.commitTransaction(currentSession);
-        return q.list();
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        List retList = currentSession.createQuery("FROM " + aClass.getName()).list();
+        currentSession.getTransaction().commit();
+        currentSession.close();
+        return retList;
     }
 
     public void save(Object o) {
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginWriteTransaction(currentSession);
-        session.save(o);
-        HibernateUtil.commitTransaction(currentSession);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        currentSession.insert(o); //.save(o);
+        currentSession.getTransaction().commit();
+        currentSession.close();
     }
 
     public void merge(Object o) {
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginWriteTransaction(currentSession);
-        session.merge(o);
-        HibernateUtil.commitTransaction(currentSession);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        currentSession.update(o); //.merge(o);
+        currentSession.getTransaction().commit();
+        currentSession.close();
     }
 
     public void delete(Object o) {
-        session.delete(o);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        currentSession.delete(o);
+        currentSession.getTransaction().commit();
+        currentSession.close();
     }
 
     public void rollback(Object o) {
-        session.refresh(o); //.evict(o);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        currentSession.refresh(o); //.evict(o);
+        currentSession.getTransaction().commit();
+        currentSession.close();
     }
 
     public Object getById(BigDecimal id) {
         Object retObj;
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginViewTransaction(currentSession);
-        retObj = session.get(aClass, id);
-        HibernateUtil.commitTransaction(currentSession);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        retObj = currentSession.get(aClass, id);
+        currentSession.getTransaction().commit();
+        currentSession.close();
         return retObj;
     }
 }

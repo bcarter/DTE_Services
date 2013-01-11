@@ -1,5 +1,7 @@
 package gov.osha.dteAdmin;
 
+import org.hibernate.StatelessSession;
+
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
@@ -17,14 +19,24 @@ public class DteUserDao extends Dao {
     }
 
     public DteUser getUserByOshaCN(String oshaCN) {
-        return (DteUser) this.getSession().createQuery(
+        DteUser retUser;
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        retUser = (DteUser) currentSession.createQuery(
                 "from DteUser as dteUser where dteUser.oshaCn=:oshaCN")
                 .setString("oshaCN", oshaCN).uniqueResult();
+        currentSession.getTransaction().commit();
+        currentSession.close();
+        return retUser;
     }
 
     public void save(DteUser dteUser) {
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
         dteUser.setOshaCn(getLdapCn(dteUser.getExtranetEmail()));
-        this.getSession().save(dteUser);
+        currentSession.insert(dteUser); //.save(dteUser);
+        currentSession.getTransaction().commit();
+        currentSession.close();
     }
 
     @SuppressWarnings("unchecked")

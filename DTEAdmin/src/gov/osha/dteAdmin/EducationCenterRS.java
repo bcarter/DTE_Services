@@ -1,6 +1,6 @@
 package gov.osha.dteAdmin;
 
-import org.hibernate.Session;
+import org.hibernate.StatelessSession;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,10 +17,11 @@ public class EducationCenterRS {
 
     private DteUser getCurrentUser(String oshaCn) {
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginViewTransaction(currentSession);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
         DteUser currentUser = dteUserDao.getUserByOshaCN(oshaCn);
-        HibernateUtil.commitTransaction(currentSession);
+        currentSession.getTransaction().commit();
+        currentSession.close();
         return currentUser;
     }
 

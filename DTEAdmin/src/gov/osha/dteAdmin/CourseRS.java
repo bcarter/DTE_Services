@@ -1,7 +1,7 @@
 package gov.osha.dteAdmin;
 
 
-import org.hibernate.Session;
+import org.hibernate.StatelessSession;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -17,10 +17,10 @@ public class CourseRS {
 
     private DteUser getCurrentUser(String oshaCn) {
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
-        Session currentSession = HibernateUtil.getSessionFactory().openSession();
-        HibernateUtil.beginViewTransaction(currentSession);
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
         DteUser currentUser = dteUserDao.getUserByOshaCN(oshaCn);
-        HibernateUtil.commitTransaction(currentSession);
+        currentSession.close();
         return currentUser;
     }
 
@@ -67,7 +67,7 @@ public class CourseRS {
         CourseDao courseDao = DaoFactory.getCourseDao();
         courseDao.save(inCourse);
 
-        return inCourse;
+        return findCourseById(inCourse.getId());
     }
 
     // This method is called if put
@@ -78,17 +78,16 @@ public class CourseRS {
 //        Response response;
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
-        CourseDao currentCourseDao = DaoFactory.getCourseDao();
-        Course currentCourse = (Course) currentCourseDao.getById(inCourse.getId());
+        Course currentCourse = findCourseById(inCourse.getId());
 
         if (currentCourse.getUpdateDate().compareTo(inCourse.getUpdateDate()) > 0) {
 
             Response.ResponseBuilder builder = Response.status(Response.Status.CONFLICT);
-            builder.type("text/html");
-            builder.entity("<h3>Course Changed by Another User</h3>");
-            throw new WebApplicationException(builder.build());
+            builder.type("application/json");
+//            builder.header("content-length", 10);
+            builder.entity(currentCourse);
 
-//            throw new WebApplicationException(Response.Status.CONFLICT);
+            throw new WebApplicationException(builder.build());
         }
 
         if (!currentUser.getUserType().equals("A") && !inCourse.getEducationCenter().getId().equals(currentUser.getEducationCenter().getId())) {
