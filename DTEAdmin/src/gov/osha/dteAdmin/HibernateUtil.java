@@ -39,7 +39,6 @@ public class HibernateUtil {
 
     /**
      * Starts a read/write hibernate transaction (FlushMode.AUTO)
-     *
      */
 //    public static void beginWriteTransaction(StatelessSession currentSession) {
 //        currentSession.beginTransaction();
@@ -48,7 +47,6 @@ public class HibernateUtil {
 
 
     // Determines whether the current transaction is active
-
     public static boolean transactionIsActive() {
         return sessionFactory.getCurrentSession().getTransaction().isActive();
     }

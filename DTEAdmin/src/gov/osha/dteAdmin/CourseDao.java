@@ -15,7 +15,7 @@ public class CourseDao extends Dao {
         StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
         currentSession.beginTransaction();
         retList = (List<Course>) currentSession.createQuery(
-                "from Course as course where course.activeInd = 1 and (course.educationCenter.id=:userEdCenter or 'A'=:userAdmin)")
+                "from Course as course where course.activeInd = 1 and (course.edCenterId=:userEdCenter or 'S'=:userAdmin)")
                 .setBigDecimal("userEdCenter", currentUser.getEducationCenter().getId())
                 .setString("userAdmin", currentUser.getUserType()).list();
         currentSession.getTransaction().commit();

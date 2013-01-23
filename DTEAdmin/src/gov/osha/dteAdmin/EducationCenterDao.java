@@ -15,7 +15,7 @@ public class EducationCenterDao extends Dao {
         StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
         currentSession.beginTransaction();
         retList = (List<EducationCenter>) currentSession.createQuery(
-                "from EducationCenter as educationCenter where educationCenter.id=:userEdCenter or 'A'=:userAdmin")
+                "from EducationCenter as educationCenter where educationCenter.id=:userEdCenter or 'S'=:userAdmin")
                 .setBigDecimal("userEdCenter", currentUser.getEducationCenter().getId())
                 .setString("userAdmin", currentUser.getUserType()).list();
         currentSession.getTransaction().commit();

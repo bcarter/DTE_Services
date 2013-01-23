@@ -26,7 +26,7 @@ public class EducationCenterRS {
     }
 
     @GET
-    @Produces({ "application/xml", "application/json" })
+    @Produces({"application/xml", "application/json"})
     public List<EducationCenter> getEducationCenters() {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 

@@ -9,11 +9,11 @@ import java.util.List;
 @Path("/Title")
 public class CourseTitleRS {
     @GET
-    @Produces({ "application/xml", "application/json" })
+    @Produces({"application/xml", "application/json"})
     public List<CourseTitle> getCourseTitles() {
         CourseTitleDao courseTitleDao = DaoFactory.getCourseTitleDao();
         @SuppressWarnings("unchecked")
-        List <CourseTitle>retList = courseTitleDao.getAll();
+        List<CourseTitle> retList = courseTitleDao.getAll();
         return retList;
     }
 }

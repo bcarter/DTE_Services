@@ -34,7 +34,7 @@ public class DteUserRS {
 
         List<DteUser> retList;
 
-        if (currentUser.getUserType().equals("A")) {
+        if (currentUser.getUserType().equals("S")) {
             retList = dteUserDao.getAll();
         } else {
             throw new WebApplicationException(Response.Status.FORBIDDEN);
@@ -52,7 +52,7 @@ public class DteUserRS {
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
         DteUser retUser;
 
-        if (currentUser.getUserType().equals("A")) {
+        if (currentUser.getUserType().equals("S")) {
             retUser = (DteUser) dteUserDao.getById(dteUserId);
         } else {
             throw new WebApplicationException(Response.Status.FORBIDDEN);
@@ -69,7 +69,7 @@ public class DteUserRS {
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
 
-        if (currentUser.getUserType().equals("A")) {
+        if (currentUser.getUserType().equals("S")) {
             inUser.setUpdateUser(currentUser.getOshaCn());
             dteUserDao.save(inUser);
         } else {
@@ -87,7 +87,7 @@ public class DteUserRS {
 
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
 
-        if (currentUser.getUserType().equals("A")) {
+        if (currentUser.getUserType().equals("S")) {
             inUser.setUpdateUser(currentUser.getOshaCn());
             dteUserDao.merge(inUser);
         } else {

@@ -9,11 +9,11 @@ import java.util.List;
 @Path("/StateCode")
 public class StateCodeRS {
     @GET
-    @Produces({ "application/xml", "application/json" })
+    @Produces({"application/xml", "application/json"})
     public List<StateCode> getStateCodes() {
         StateCodeDao stateCodeDao = DaoFactory.getStateCodeDao();
         @SuppressWarnings("unchecked")
-        List <StateCode>retList = stateCodeDao.getAll();
+        List<StateCode> retList = stateCodeDao.getAll();
         return retList;
     }
 }

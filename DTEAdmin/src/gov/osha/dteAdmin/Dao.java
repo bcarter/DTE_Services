@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Dao {
 
-//    private Session session;
+    //    private Session session;
     private Class aClass;
     protected static final Logger systemLogger = Logger.getLogger("system");
 

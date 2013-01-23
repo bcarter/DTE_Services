@@ -45,9 +45,9 @@ public class DteUserDao extends Dao {
         StringBuffer ldapUrl = new StringBuffer("ldap://");
         try {
             InputStream xmlStream = getClass().getResourceAsStream("/properties.xml");
-            if( xmlStream == null ) {
+            if (xmlStream == null) {
                 ldapUrl.append("155.103.63.232:389");
-            }  else {
+            } else {
                 configFile.loadFromXML(xmlStream);
                 ldapUrl.append(configFile.getProperty("ldapUrl"));
             }
@@ -55,7 +55,7 @@ public class DteUserDao extends Dao {
             // throw exception
         }
 
-        StringBuffer retString= new StringBuffer();
+        StringBuffer retString = new StringBuffer();
         Hashtable env = new Hashtable(11);
         env.put(javax.naming.Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(javax.naming.Context.PROVIDER_URL, ldapUrl.toString());
