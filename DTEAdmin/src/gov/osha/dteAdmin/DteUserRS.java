@@ -85,6 +85,32 @@ public class DteUserRS {
     public Response doPut(DteUser inUser) {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
+        DteUser existingUser = findDteUserById(inUser.getId());
+
+        if (existingUser == null) {
+
+            Response.ResponseBuilder builder = Response.status(Response.Status.NOT_FOUND);
+            throw new WebApplicationException(builder.build());
+        }
+
+        if (!existingUser.getOshaCn().equals(inUser.getOshaCn())) {
+
+            Response.ResponseBuilder builder = Response.status(Response.Status.PRECONDITION_FAILED);
+            builder.type("application/json");
+            builder.entity(existingUser);
+
+            throw new WebApplicationException(builder.build());
+        }
+
+        if (existingUser.getUpdateDate().compareTo(inUser.getUpdateDate()) > 0) {
+
+            Response.ResponseBuilder builder = Response.status(Response.Status.CONFLICT);
+            builder.type("application/json");
+            builder.entity(existingUser);
+
+            throw new WebApplicationException(builder.build());
+        }
+
         DteUserDao dteUserDao = DaoFactory.getDteUserDao();
 
         if (currentUser.getUserType().equals("S")) {

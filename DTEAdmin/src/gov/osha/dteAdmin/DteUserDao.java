@@ -23,7 +23,7 @@ public class DteUserDao extends Dao {
         StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
         currentSession.beginTransaction();
         retUser = (DteUser) currentSession.createQuery(
-                "from DteUser as dteUser where dteUser.oshaCn=:oshaCN")
+                "from DteUser as dteUser where dteUser.oshaCn=:oshaCN and (dteUser.userType='A' or dteUser.userType='S')")
                 .setString("oshaCN", oshaCN).uniqueResult();
         currentSession.getTransaction().commit();
         currentSession.close();
@@ -35,6 +35,14 @@ public class DteUserDao extends Dao {
         currentSession.beginTransaction();
         dteUser.setOshaCn(getLdapCn(dteUser.getExtranetEmail()));
         currentSession.insert(dteUser); //.save(dteUser);
+        currentSession.getTransaction().commit();
+        currentSession.close();
+    }
+
+    public void merge(DteUser dteUser) {
+        StatelessSession currentSession = HibernateUtil.getSessionFactory().openStatelessSession();
+        currentSession.beginTransaction();
+        currentSession.update(dteUser); //.save(dteUser);
         currentSession.getTransaction().commit();
         currentSession.close();
     }

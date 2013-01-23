@@ -1,6 +1,5 @@
 package gov.osha.dteAdmin;
 
-import org.hibernate.Query;
 import org.hibernate.StatelessSession;
 
 import java.math.BigDecimal;

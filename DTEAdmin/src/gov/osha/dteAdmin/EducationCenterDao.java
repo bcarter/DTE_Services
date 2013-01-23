@@ -16,7 +16,7 @@ public class EducationCenterDao extends Dao {
         currentSession.beginTransaction();
         retList = (List<EducationCenter>) currentSession.createQuery(
                 "from EducationCenter as educationCenter where educationCenter.id=:userEdCenter or 'S'=:userAdmin")
-                .setBigDecimal("userEdCenter", currentUser.getEducationCenter().getId())
+                .setBigDecimal("userEdCenter", currentUser.getCenterId())
                 .setString("userAdmin", currentUser.getUserType()).list();
         currentSession.getTransaction().commit();
         currentSession.close();

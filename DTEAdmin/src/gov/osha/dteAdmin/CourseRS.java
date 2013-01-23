@@ -45,7 +45,7 @@ public class CourseRS {
         CourseDao courseDao = DaoFactory.getCourseDao();
         Course retCourse = (Course) courseDao.getById(courseId);
 
-        if (!currentUser.getUserType().equals("S") && !retCourse.getEdCenterId().equals(currentUser.getEducationCenter().getId())) {
+        if (!currentUser.getUserType().equals("S") && !retCourse.getEdCenterId().equals(currentUser.getCenterId())) {
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
@@ -59,7 +59,7 @@ public class CourseRS {
     public Course doPost(Course inCourse) {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
-        if (!currentUser.getUserType().equals("S") && !inCourse.getEdCenterId().equals(currentUser.getEducationCenter().getId())) {
+        if (!currentUser.getUserType().equals("S") && !inCourse.getEdCenterId().equals(currentUser.getCenterId())) {
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
@@ -84,13 +84,12 @@ public class CourseRS {
 
             Response.ResponseBuilder builder = Response.status(Response.Status.CONFLICT);
             builder.type("application/json");
-//            builder.header("content-length", 10);
             builder.entity(currentCourse);
 
             throw new WebApplicationException(builder.build());
         }
 
-        if (!currentUser.getUserType().equals("S") && !inCourse.getEdCenterId().equals(currentUser.getEducationCenter().getId())) {
+        if (!currentUser.getUserType().equals("S") && !inCourse.getEdCenterId().equals(currentUser.getCenterId())) {
             throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
 
