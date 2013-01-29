@@ -33,6 +33,11 @@ public class DaoFactory {
         return (CourseTitleDao) getDAOByClass(CourseTitleDao.class);
     }
 
+    //returns CourseTitleDao
+    public static BatchLoadErrorDao getBatchLoadErrorDao() {
+        return (BatchLoadErrorDao) getDAOByClass(BatchLoadErrorDao.class);
+    }
+
     //returns the DAO and configures it with current session
 
     public static Dao getDAOByClass(Class c) {
