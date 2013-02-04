@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="java:hibernate/SessionFactory">
+        <!--         <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property> -->
+        <!--         <property name="hibernate.connection.password"></property> -->
+        <!--         <property name="hibernate.connection.url">jdbc:oracle:thin:@utd1:1521:oshanet</property> -->
+        <!--         <property name="hibernate.connection.username">dte_course_admin</property> -->
+        <!--         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property> -->
+        <!--         <property name="hibernate.search.autoregister_listeners">false</property> -->
+
+        <property name="hibernate.connection.datasource">DTEDataSource</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!--         <mapping class="gov.osha.dteAdmin.PhoneNumber" /> -->
+        <!--         <mapping class="gov.osha.dteAdmin.Address" /> -->
+        <!--         <mapping class="gov.osha.dteAdmin.Customer" /> -->
+        <mapping class="gov.osha.dteAdmin.EducationCenter"/>
+        <!--         <mapping class="gov.osha.dteAdmin.Industry" /> -->
+        <!--         <mapping class="gov.osha.dteAdmin.ShAudience" /> -->
+        <!--         <mapping class="gov.osha.dteAdmin.GuestIdGenerator" /> -->
+        <!--         <mapping class="gov.osha.dteAdmin.ToadPlanTable" /> -->
+        <mapping class="gov.osha.dteAdmin.CourseLanguage"/>
+        <mapping class="gov.osha.dteAdmin.BatchLoadError"/>
+        <mapping class="gov.osha.dteAdmin.Course"/>
+        <!--         <mapping class="gov.osha.dteAdmin.ShCourse" /> -->
+        <mapping class="gov.osha.dteAdmin.DteUser"/>
+        <mapping class="gov.osha.dteAdmin.CourseTitle"/>
+        <!--         <mapping class="gov.osha.dteAdmin.Guest" /> -->
+        <mapping class="gov.osha.dteAdmin.StateCode"/>
+        <!--         <mapping class="gov.osha.dteAdmin.VExtranetUsers" /> -->
+    </session-factory>
+</hibernate-configuration>
