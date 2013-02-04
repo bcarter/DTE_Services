@@ -27,7 +27,7 @@ public class BatchLoadErrorRS {
     @GET
     @Produces({"application/xml", "application/json"})
     @Path("{logId}")
-    public BatchLoadError findCourseById(@PathParam("logId") BigDecimal logId) {
+    public BatchLoadError findBatchloaderrorById(@PathParam("logId") BigDecimal logId) {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
         if (!currentUser.getUserType().equals("S")) {
