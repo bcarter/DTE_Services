@@ -27,7 +27,7 @@ public class BatchLoadErrorRS {
     @GET
     @Produces({"application/xml", "application/json"})
     @Path("{logId}")
-    public BatchLoadError findBatchloaderrorById(@PathParam("logId") BigDecimal logId) {
+    public BatchLoadError findBatchLoadErrorById(@PathParam("logId") BigDecimal logId) {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
 
         if (!currentUser.getUserType().equals("S")) {
@@ -35,9 +35,7 @@ public class BatchLoadErrorRS {
         }
 
         BatchLoadErrorDao batchLoadErrorDao = DaoFactory.getBatchLoadErrorDao();
-        BatchLoadError retBatchLoadError = (BatchLoadError) batchLoadErrorDao.getById(logId);
-
-        return retBatchLoadError;
+        return (BatchLoadError) batchLoadErrorDao.getById(logId);
     }
 
     @GET
