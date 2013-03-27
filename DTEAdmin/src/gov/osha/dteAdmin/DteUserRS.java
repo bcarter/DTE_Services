@@ -88,13 +88,11 @@ public class DteUserRS {
         DteUser existingUser = findDteUserById(inUser.getId());
 
         if (existingUser == null) {
-
             Response.ResponseBuilder builder = Response.status(Response.Status.NOT_FOUND);
             throw new WebApplicationException(builder.build());
         }
 
         if (!existingUser.getOshaCn().equals(inUser.getOshaCn())) {
-
             Response.ResponseBuilder builder = Response.status(Response.Status.PRECONDITION_FAILED);
             builder.type("application/json");
             builder.entity(existingUser);
@@ -103,7 +101,6 @@ public class DteUserRS {
         }
 
         if (existingUser.getUpdateDate().compareTo(inUser.getUpdateDate()) > 0) {
-
             Response.ResponseBuilder builder = Response.status(Response.Status.CONFLICT);
             builder.type("application/json");
             builder.entity(existingUser);
