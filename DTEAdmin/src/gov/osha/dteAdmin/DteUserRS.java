@@ -45,6 +45,14 @@ public class DteUserRS {
 
     @GET
     @Produces({"application/xml", "application/json"})
+    @Path("/current")
+    public DteUser findCurrentUser() {
+        DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
+        return (currentUser);
+    }
+
+    @GET
+    @Produces({"application/xml", "application/json"})
     @Path("{dteUser}")
     public DteUser findDteUserById(@PathParam("dteUser") BigDecimal dteUserId) {
         DteUser currentUser = getCurrentUser(headers.getRequestHeader("OSHA_CN").get(0));
